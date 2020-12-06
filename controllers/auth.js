@@ -86,7 +86,7 @@ const isSignin = (req, res, next) => {
         jwt.verify(token, process.env.mySecret, async (err, decodedToken) => {
             if(err){
                 return res.status(400).json({ 
-                    error: 'token is not verified'
+                    error: 'unauthorized token'
                 })
             }
             req.auth = decodedToken
@@ -94,7 +94,7 @@ const isSignin = (req, res, next) => {
         })
     }else{
         res.status(400).json({
-            error: 'unauthorized token'
+            error: 'Token not found'
         })
     }
 }
