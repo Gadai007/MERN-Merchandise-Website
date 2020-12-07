@@ -54,6 +54,7 @@ const userPurchaseList = async (req, res) => {
     }
 }
 
+//middleware
 const pushOrderInPurchaseList = (req, res, next) => {
     let purchases = []
     req.body.order.products.forEach(product => {
@@ -83,5 +84,6 @@ module.exports = {
     getUserById,
     getUser,
     updateUser,
-    userPurchaseList
+    userPurchaseList,
+    pushOrderInPurchaseList
 }

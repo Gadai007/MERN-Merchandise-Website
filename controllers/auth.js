@@ -29,7 +29,7 @@ const signup = async (req, res) => {
         })
     } else {
         res.status(400).json({
-            err: 'not able to send a user'
+            err: 'not able to save a user'
         })
     }
 }
