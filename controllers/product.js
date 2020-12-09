@@ -107,10 +107,10 @@ const getAllProduct = async (req, res) => {
     const sortBy = req.query.sortBy ? req.query.sortBy : '_id'
 
     const products = await Product.find().limit(limit)
-                                         .sort([[sortBy, 'asc']])
-                                         .select('-photo')
-                                         .populate('category')
-                                        
+        .sort([[sortBy, 'asc']])
+        .select('-photo')
+        .populate('category')
+
 
     if (products) {
         res.status(200).json(products)
@@ -121,6 +121,33 @@ const getAllProduct = async (req, res) => {
 
 }
 
+const getAllUniqueCategies = (req, res) => {
+    Product.distinct('category', {}, (err, category) => {
+        if (err) {
+            return res.status(400).json({ error: 'no category found' })
+        }
+        res.status(200).json(category)
+    })
+}
+
+const updateStock = (req, res, next) => {
+    let myOperations = req.body.order.products.map(product => {
+        return {
+            updateOne: {
+                filter: { _id: product._id },
+                update: { $inc: { stock: -product.count, sold: + product.count } }
+            }
+        }
+    })
+
+    Product.bulkWrite(myOperations, {}, (err, products) => {
+        if (err) {
+            return res.status(400).json({ error: 'bulk operation failed' })
+        }
+        next()
+    })
+}
+
 module.exports = {
     getProductById,
     createProduct,
@@ -128,5 +155,7 @@ module.exports = {
     photo,
     deleteProduct,
     updateProduct,
-    getAllProduct
+    getAllProduct,
+    getAllUniqueCategies,
+    updateStock
 }

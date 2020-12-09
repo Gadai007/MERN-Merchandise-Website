@@ -6,7 +6,8 @@ const {
     photo,
     deleteProduct,
     updateProduct,
-    getAllProduct} = require('../controllers/product')
+    getAllProduct,
+    getAllUniqueCategies } = require('../controllers/product')
 const { getUserById } = require('../controllers/user')
 const { isSignin, isAuthenticated, isAdmin } = require('../controllers/auth')
 
@@ -28,5 +29,6 @@ route.delete('/product/:productId/:id', isSignin, isAuthenticated, isAuthenticat
 route.put('/product/:productId/:id', isSignin, isAuthenticated, isAdmin, updateProduct)
 
 //limiting route
-route.get('/product', getAllProduct)
+route.get('/products', getAllProduct)
+route.get('/products/categories', getAllUniqueCategies)
 module.exports = route
