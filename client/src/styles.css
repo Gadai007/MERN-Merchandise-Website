@@ -1,0 +1,65 @@
+
+.btn,
+.jumbotron,
+.nav :hover {
+  border-radius: 0px;
+}
+
+h1, h2, h3, h4, h5, h6, p{
+  color: #7579e7;
+}
+
+
+body{
+  font-family: 'Lobster', cursive;
+  background-color: #b9fffc;
+}
+
+footer{
+  background-color: #7579e7;
+  font-size: 2rem;
+  color: #a3d8f4;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+form{
+  background-color: #7579e7;
+  height: 350px;
+  width: 800px;
+  padding: 40px;
+  border-radius: 30px;
+  color: #b9fffc;
+  align-items: center;
+  position: absolute;
+  right: 350px;
+  font-size: 1.5rem;
+}
+
+.alert{
+  width: 650px;
+  margin: auto;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.navbar{
+  background-color: #7579e7;
+  color: #a3d8f4;
+  height: 4.5rem;
+}
+
+.nav-link{
+  color: #a3d8f4;
+}
+
+.success{
+  background-color: #b9fffc;
+  margin-top: 15px;
+  height: 40px;
+  width: 80px;
+  border-radius: 8px;
+  color: #7579e7;
+  font-size: 1.2rem;
+}

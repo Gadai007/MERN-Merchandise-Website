@@ -1,9 +1,13 @@
 import React from 'react'
+import Routes from './Routes'
+import Footer from './core/Footer'
+import './styles.css'
 
 function App() {
   return (
     <div className="App">
-      <h1>Frontend</h1>
+      <Routes />
+      <Footer />
     </div>
   );
 }
