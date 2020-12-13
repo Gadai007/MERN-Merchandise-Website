@@ -6,8 +6,8 @@ import { signin, isAuthenticated, authenticate } from '../auth/helper/index'
 const Signin = () => {
 
     const [values, setValues] = useState({
-        email: '',
-        password: '',
+        email: 'deb@gmail.com',
+        password: '12345',
         error: '',
         loading: false,
         didRedirect: false
@@ -33,12 +33,25 @@ const Signin = () => {
                     setValues({ ...values, error: response.error, loading: false })
                 } else {
                     authenticate(response, () => {
-                        console.log(response)
                         setValues({ ...values, didRedirect: true })
                     })
                 }
             })
             .catch(err => console.log('signin failed'))
+    }
+
+    const performRedirect = () => {
+        if(values.didRedirect){
+            if(user && user.role === 1){
+                return <Redirect to='/admin/dashboard'/>
+            }else{
+                return <Redirect to='/user/dashboard'/>
+            }
+        }
+
+        if(isAuthenticated()){
+            return <Redirect to='/'/>
+        }
     }
 
     const loadingMessage = () => {
@@ -106,6 +119,7 @@ const Signin = () => {
             title='Signin'
             description='signin an user'>
             {signinForm()}
+            {performRedirect()}
         </Base>
     )
 }

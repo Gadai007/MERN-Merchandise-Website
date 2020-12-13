@@ -6,31 +6,31 @@
 }
 
 h1, h2, h3, h4, h5, h6, p{
-  color: #7579e7;
+  color: #4e8d7c;
 }
 
 
 body{
   font-family: 'Lobster', cursive;
-  background-color: #b9fffc;
+  background-color: #f3f2da;
 }
 
 footer{
-  background-color: #7579e7;
+  background-color: #4e8d7c;
   font-size: 2rem;
-  color: #a3d8f4;
+  color: #ea97ad;
   position: absolute;
   bottom: 0;
   width: 100%;
 }
 
 form{
-  background-color: #7579e7;
+  background-color: #4e8d7c;
   height: 350px;
   width: 800px;
   padding: 40px;
   border-radius: 30px;
-  color: #b9fffc;
+  color: #f3f2da;
   align-items: center;
   position: absolute;
   right: 350px;
@@ -45,21 +45,34 @@ form{
 }
 
 .navbar{
-  background-color: #7579e7;
-  color: #a3d8f4;
+  background-color: #4e8d7c;
   height: 4.5rem;
 }
 
 .nav-link{
-  color: #a3d8f4;
+  font-size: 1.2rem;
+  color: #ea97ad;
+}
+
+.nav-link:hover{
+  color: #eee;
 }
 
 .success{
-  background-color: #b9fffc;
+  background-color: #f3f2da;
   margin-top: 15px;
   height: 40px;
   width: 80px;
   border-radius: 8px;
-  color: #7579e7;
+  color: #4e8d7c;
   font-size: 1.2rem;
+}
+
+.admin{
+  background-color: #045762;
+  border-radius: 20px;
+}
+
+.color{
+  color:#f3f2da
 }
