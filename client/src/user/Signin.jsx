@@ -41,16 +41,16 @@ const Signin = () => {
     }
 
     const performRedirect = () => {
-        if(values.didRedirect){
-            if(user && user.role === 1){
-                return <Redirect to='/admin/dashboard'/>
-            }else{
-                return <Redirect to='/user/dashboard'/>
+        if (values.didRedirect) {
+            if (user && user.role === 1) {
+                return <Redirect to='/admin/dashboard' />
+            } else {
+                return <Redirect to='/user/dashboard' />
             }
         }
 
-        if(isAuthenticated()){
-            return <Redirect to='/'/>
+        if (isAuthenticated()) {
+            return <Redirect to='/' />
         }
     }
 

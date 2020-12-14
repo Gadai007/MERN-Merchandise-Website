@@ -30,6 +30,11 @@ const AdminDashBoard = () => {
                         </Link>
                     </h5>
                     <h5 className="card-text">
+                        <Link to="/admin/categories" className="nav-link">
+                            Manage Categories
+                        </Link>
+                    </h5>
+                    <h5 className="card-text">
                         <Link to="/admin/create/product" className="nav-link">
                             Create Product
                         </Link>
