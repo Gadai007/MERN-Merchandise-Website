@@ -13,20 +13,22 @@ h1, h2, h3, h4, h5, h6, p{
 body{
   font-family: 'Lobster', cursive;
   background-color: #f3f2da;
+  height: 100%;
+  position: relative;
+  padding-bottom: 100px;
 }
 
 footer{
   background-color: #4e8d7c;
   font-size: 2rem;
   color: #ea97ad;
-  position: absolute;
-  bottom: 0;
+  position :absolute;
   width: 100%;
+  bottom: 0;
 }
 
 form{
   background-color: #4e8d7c;
-  height: 350px;
   width: 800px;
   padding: 40px;
   border-radius: 30px;
@@ -35,6 +37,10 @@ form{
   position: absolute;
   right: 350px;
   font-size: 1.5rem;
+}
+
+.base{
+  min-height: 100vh;
 }
 
 .alert{
@@ -61,14 +67,12 @@ form{
 .success{
   background-color: #f3f2da;
   margin-top: 15px;
-  height: 40px;
-  width: 80px;
   border-radius: 8px;
   color: #4e8d7c;
   font-size: 1.2rem;
 }
 
-.admin{
+.admin, .products{
   background-color: #045762;
   border-radius: 20px;
 }
@@ -76,3 +80,9 @@ form{
 .color{
   color:#f3f2da
 }
+
+.product .form-group{
+  padding: 5px;
+}
+
+
