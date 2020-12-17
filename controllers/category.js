@@ -52,7 +52,7 @@ const getAllCategories = async (req, res) => {
 //desc update a category
 
 const updateCategory = async (req, res) => {
-    const category = await Category.findByIdAndUpdate({ _id: req.category._id }, { $set: req.body }, { new: true,useFindAndModify: false })
+    const category = await Category.findByIdAndUpdate( req.category._id , { $set: req.body }, { new: true,useFindAndModify: false })
     if (category) {
         res.status(200).json(category)
     }else{

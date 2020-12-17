@@ -14,7 +14,7 @@ const ManageProducts = () => {
     const preLoad = () => {
         getAllProducts().then(response => {
             if (response.error) {
-                console.log(response.err)
+                console.log(response.error)
             } else {
                 setProducts(response)
             }

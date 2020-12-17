@@ -21,6 +21,8 @@ const UpdateProduct = (props) => {
 
     const { user, token } = isAuthenticated()
 
+    const productId = props.match.params.productId
+
     const preLoad = (productId) => {
         getAProduct(productId).then(data => {
             if (data.error) {
@@ -57,7 +59,7 @@ const UpdateProduct = (props) => {
     }
 
     useEffect(() => {
-        preLoad(props.match.params.productId)
+        preLoad(productId)
     }, [])
 
     const onChangeHandler = (event) => {
