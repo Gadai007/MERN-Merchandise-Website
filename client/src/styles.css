@@ -39,6 +39,12 @@ form{
   font-size: 1.5rem;
 }
 
+.cart{
+  margin: 10px 10px 10px 10px;
+  height: 50%;
+  width: 50%;
+}
+
 .card{
   background-color: #045762;
   border-radius: 10px;

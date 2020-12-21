@@ -7,6 +7,7 @@ const userRoute = require('./routes/userRoute')
 const categoryRoute = require('./routes/categoryRoute')
 const productRoute = require('./routes/productRoute')
 const orderRoute = require('./routes/orderRoute')
+const paymentRoute = require('./routes/paymentRoute')
 require('dotenv').config()
 
 const PORT = process.env.PORT || 5000
@@ -31,3 +32,4 @@ app.use('/api', userRoute)
 app.use('/api', categoryRoute)
 app.use('/api', productRoute)
 app.use('/api', orderRoute)
+app.use('/api', paymentRoute)
