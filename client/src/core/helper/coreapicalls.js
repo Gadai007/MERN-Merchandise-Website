@@ -34,11 +34,10 @@ export const removeItemFromCart = (productId) => {
     if (typeof window !== 'undefined') {
         cart = JSON.parse(localStorage.getItem('cart'))
     }
-    console.log(cart)
+
     cart = cart.filter(product => {
         return product._id !== productId
     })
-    console.log(cart)
 
     localStorage.setItem('cart', JSON.stringify(cart))
     return cart

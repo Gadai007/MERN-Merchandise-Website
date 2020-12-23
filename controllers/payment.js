@@ -1,18 +1,19 @@
-const braintree = require("braintree");
+const braintree = require('braintree');
 
 const gateway = new braintree.BraintreeGateway({
     environment: braintree.Environment.Sandbox,
-    merchantId: "useYourMerchantId",
-    publicKey: "useYourPublicKey",
-    privateKey: "useYourPrivateKey"
-});
+    merchantId:   'mcsf4rmnd9tb3jc7',
+    publicKey:    'xwgps89s8c88q45c',
+    privateKey:   '1fa2473d693905bb4f171a81a0da10fe'
+  });
 
 const getToken = (req, res) => {
     gateway.clientToken.generate({}, (err, response) => {
         if (err) {
-            return res.status(500).json({ error: 'payment token not generated', err })
+            res.status(500).send(err)
+        } else {
+            res.status(200).send(response)
         }
-        res.status(200).json(response)
     });
 }
 
@@ -28,10 +29,10 @@ const processPayment = (req, res) => {
             submitForSettlement: true
         }
     }, (err, result) => {
-        if(err){
-            return res.status(500).json({error: 'payment post request failed ', err})
+        if (err) {
+            return res.status(500).send(err)
         }
-        res.status(200).json(result)
+        res.status(200).send(result)
     });
 }
 

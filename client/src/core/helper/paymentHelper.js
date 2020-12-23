@@ -1,5 +1,3 @@
-import { response } from "express"
-import { token } from "morgan"
 
 export const getMeToken = (userId, token) => {
     return fetch(`/api/payment/gettoken/${userId}`, {

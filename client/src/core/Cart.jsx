@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Base from './Base'
 import Card from './Card'
 import { loadToCart } from './helper/coreapicalls'
+import Payment from './Payment'
 
 
 const Cart = () => {
@@ -13,7 +14,7 @@ const Cart = () => {
         setProducts(loadToCart())
     }, [reload])
 
-    const loadAllProducts = () => {
+    const loadAllProducts = (products) => {
         return (
             <div>
                 <h1>Your Products:</h1>
@@ -35,13 +36,6 @@ const Cart = () => {
         )
     }
 
-    const loadCheckout = () => {
-        return (
-            <div>
-                <h1>Checkout your products</h1>
-            </div>
-        )
-    }
 
     return (
         <Base
@@ -49,10 +43,10 @@ const Cart = () => {
             description='Manage your products'>
             <div className="row">
                 <div className="col-6">
-                    {loadAllProducts()}
+                    {loadAllProducts(products)}
                 </div>
                 <div className="col-6">
-                    {loadCheckout()}
+                    <Payment products={products} setReload={setReload} reload={reload}/>
                 </div>
             </div>
         </Base>
