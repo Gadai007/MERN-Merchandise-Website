@@ -1,42 +1,37 @@
-const braintree = require('braintree');
+const stripe = require('stripe')('SECRET')
+const { v1: uuid } = require('uuid')
 
-const gateway = new braintree.BraintreeGateway({
-    environment: braintree.Environment.Sandbox,
-    merchantId:   'mcsf4rmnd9tb3jc7',
-    publicKey:    'xwgps89s8c88q45c',
-    privateKey:   '1fa2473d693905bb4f171a81a0da10fe'
-  });
 
-const getToken = (req, res) => {
-    gateway.clientToken.generate({}, (err, response) => {
-        if (err) {
-            res.status(500).send(err)
-        } else {
-            res.status(200).send(response)
-        }
-    });
-}
+const makePayment = (req, res) => {
+    const { products, token } = req.body
 
-const processPayment = (req, res) => {
+    let amount = 0
+    products.map(product => {
+        amount += products.price
+    })
 
-    let nonceFromTheClient = req.body.paymentMethodNonce
-    let amountFromTheClient = req.body.amount
+    const idempotencyKey = uuid()
 
-    gateway.transaction.sale({
-        amount: amountFromTheClient,
-        paymentMethodNonce: nonceFromTheClient,
-        options: {
-            submitForSettlement: true
-        }
-    }, (err, result) => {
-        if (err) {
-            return res.status(500).send(err)
-        }
-        res.status(200).send(result)
-    });
+    return stripe.customers.create({
+        email: token.email,
+        source: token.id
+    }).then(customer => {
+        stripe.charges.create({
+            amount: amount,
+            currency: 'usd',
+            customer: customer.id,
+            receipt_email: token.email,
+            shipping: {
+                name: token.card.name
+            }
+        }, { idempotencyKey })
+            .then(result => {
+                res.status(200).json(result)
+            })
+            .catch(err => console.log(err))
+    })
 }
 
 module.exports = {
-    getToken,
-    processPayment
+    makePayment
 }

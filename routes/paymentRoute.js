@@ -1,10 +1,7 @@
 const route = require('express').Router()
-const { isSignin, isAuthenticated } = require('../controllers/auth')
-const { getToken, processPayment} = require('../controllers/payment')
-const { getUserById } =require('../controllers/user')
 
-route.param('id', getUserById)
+const { makePayment} = require('../controllers/payment')
 
-route.get('/payment/gettoken/:id', isSignin, isAuthenticated, getToken)
-route.post('/payment/braintree/:id', isSignin, isAuthenticated, processPayment)
+
+route.post('/payment', makePayment)
 module.exports = route
