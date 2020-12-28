@@ -131,7 +131,7 @@ const getAllUniqueCategies = (req, res) => {
 }
 
 const updateStock = (req, res, next) => {
-    let myOperations = req.body.order.products.map(product => {
+    let myOperations = req.body.products.map(product => {
         return {
             updateOne: {
                 filter: { _id: product._id },

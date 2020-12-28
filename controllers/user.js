@@ -57,15 +57,15 @@ const userPurchaseList = async (req, res) => {
 //middleware
 const pushOrderInPurchaseList = (req, res, next) => {
     let purchases = []
-    req.body.order.products.forEach(product => {
+    req.body.products.forEach(product => {
         purchases.push({
             _id: product._id,
             name: product.name,
             description: product.description,
             category: product.category,
             quantity: product.quantity,
-            amount: req.body.order.amount,
-            transaction_id: req.body.order.transaction_id
+            amount: req.body.amount,
+            transaction_id: req.body.transaction_id
         })
     })
 

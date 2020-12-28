@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/helper'
 import { createOrder, emptyCart, loadToCart } from './helper/coreapicalls'
 import StripeCheckout from 'react-stripe-checkout'
+import { result } from 'lodash'
 
 
 
@@ -17,7 +18,7 @@ const Payment = ({ products, setReload = f => f, reload = undefined }) => {
     })
 
     const userId = isAuthenticated() && isAuthenticated().user.id
-    const token = isAuthenticated() && isAuthenticated().token
+    const tokenId = isAuthenticated() && isAuthenticated().token
 
 
     const getAmount = () => {
@@ -29,16 +30,44 @@ const Payment = ({ products, setReload = f => f, reload = undefined }) => {
     }
 
    const makePayment = (token) => {
-       
+       const body = {
+           token,
+           products
+       }
+
+       const headers = {
+           'Content-Type': 'application/json'
+       }
+
+       return fetch('/api/payment', {
+           method: 'POST',
+           headers,
+           body: JSON.stringify(body)
+       })
+       .then(response => {
+           emptyCart(() => {
+               response.json().then(res => {
+                   console.log(products)
+                   const order = {
+                       products: products,
+                       transaction_id: res.balance_transaction,
+                       amount: res.amount
+                   }
+                   createOrder(userId, tokenId, order)
+               })
+        })
+        setReload(!reload)
+       })
+       .catch(err => console.log(err))
    }
 
 
     const showStripeButton = () => {
         return isAuthenticated() ? (
             <StripeCheckout
-                stripeKey=''
+                stripeKey='pk_test_51I2B3NGeKgANNoouexWJ6Bwm6IZ6zUjzopMq4DNqgY103hMWZ4qh8FXdOtKumYRRCYtTSSqxXaU5ndADAyUHsibg00FEtNIr43'
                 token={makePayment}
-                amount={getAmount}
+                amount={getAmount() * 100}
                 name='Buy your merch'
                 shippingAddress
                 billingAddress>
@@ -54,7 +83,7 @@ const Payment = ({ products, setReload = f => f, reload = undefined }) => {
     return (
         <div>
             <h1>Payment</h1>
-            <h3>Total amount you have to pay $ {getAmount()}</h3>
+            <h3>Total amount you have to pay Rs. {getAmount()}</h3>
             {showStripeButton()}
         </div>
     )

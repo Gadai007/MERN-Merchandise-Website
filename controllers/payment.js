@@ -1,4 +1,4 @@
-const stripe = require('stripe')('SECRET')
+const stripe = require('stripe')('sk_test_51I2B3NGeKgANNoou7sZC4aPELLrlcy2kOo8jMHm0dfoZsInpBOcbwDVeeyY4dBzEFVzJrz9tnDK7CzuSYQ5XjDOA00PxEJn3WG')
 const { v1: uuid } = require('uuid')
 
 
@@ -7,7 +7,7 @@ const makePayment = (req, res) => {
 
     let amount = 0
     products.map(product => {
-        amount += products.price
+        amount += product.price
     })
 
     const idempotencyKey = uuid()
@@ -17,12 +17,20 @@ const makePayment = (req, res) => {
         source: token.id
     }).then(customer => {
         stripe.charges.create({
-            amount: amount,
-            currency: 'usd',
+            amount: amount * 100,
+            currency: 'inr',
             customer: customer.id,
             receipt_email: token.email,
+            description: 'its a test account',
             shipping: {
-                name: token.card.name
+                name: token.card.name,
+                address: {
+                    line1: token.card.address_line1,
+                    line2: token.card.address_line2,
+                    city: token.card.address_city,
+                    country: token.card.address_country,
+                    postal_code: token.card.address_zip
+                }
             }
         }, { idempotencyKey })
             .then(result => {
