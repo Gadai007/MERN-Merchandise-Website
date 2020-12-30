@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
+const path = require('path')
 const cookieParser = require('cookie-parser')
 const authRoute = require('./routes/authRoute')
 const userRoute = require('./routes/userRoute')
@@ -25,6 +26,16 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 }))
 .catch((err) => console.log(err));
 
+//deployment
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
+}
 
 //routes
 app.use('/api', authRoute)
