@@ -47,7 +47,7 @@ const Payment = ({ products, setReload = f => f, reload = undefined }) => {
        .then(response => {
            emptyCart(() => {
                response.json().then(res => {
-                   console.log(products)
+
                    const order = {
                        products: products,
                        transaction_id: res.balance_transaction,
